@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Scores</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Check Scores for {{ class_name }} - {{ subject }}</h1>
+    </header>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.score }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="back-button">
+            <a href="{{ url_for('teacher_dashboard') }}"><button>Back to Dashboard</button></a>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h2>Welcome, {{ session['email'] }}</h2>
+
+    <h3>Student Details:</h3>
+    <ul>
+        <li>First Name: {{ student_details.first_name }}</li>
+        <li>Last Name: {{ student_details.last_name }}</li>
+        <li>Class: {{ student_details.class_name }}</li>
+        <li>Section: {{ student_details.section }}</li>
+        <li>Email: {{ student_details.email }}</li>
+        <li>Phone Number: {{ student_details.phone_number }}</li>
+    </ul>
+
+    <h3>Available Assessments</h3>
+    {% if student_details.assessments %}
+        <ul>
+            {% for assessment in student_details.assessments %}
+                <li>
+                    Assessment for {{ assessment[1] }} - {{ assessment[2] }}:
+                    <a href="{{ url_for('download_file', filename=assessment[3]) }}" download>{{ assessment[3] }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No assessments available at this time.</p>
+    {% endif %}
+
+    <h3>Upload Answer Sheet</h3>
+    <form action="{{ url_for('upload_answer_sheet') }}" method="POST" enctype="multipart/form-data">
+        <input type="text" name="subject" placeholder="Subject" required>
+        <input type="file" name="file" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    <a href="{{ url_for('check_report_card') }}">Check Report Card</a>
+    <a href="{{ url_for('index') }}">Logout</a>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

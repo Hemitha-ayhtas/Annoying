@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Scores</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Check Scores</h1>
+    </header>
+    <main>
+        <form action="{{ url_for('check_scores') }}" method="POST">
+            <label for="class_name">Class:</label>
+            <input type="text" id="class_name" name="class_name" required><br>
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject" required><br>
+            <input type="submit" value="Check">
+        </form>
+    </main>
+</body>
+</html>

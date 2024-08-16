@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Students</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Track Students</h1>
+    </header>
+    <main>
+        <form action="{{ url_for('track_students_form') }}" method="POST">
+            <label for="class_name">Class:</label>
+            <input type="text" id="class_name" name="class_name" required><br>
+            <input type="submit" value="Submit">
+        </form>
+    </main>
+</body>
+</html>
